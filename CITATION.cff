@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: "Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining"
+message: "If you use this code, please cite this work."
+type: software
+authors:
+  - family-names: Shimizu
+    given-names: Takahiro
+year: 2026
+license: MIT

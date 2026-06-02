@@ -1,0 +1,10 @@
+numpy
+pandas
+regex
+sentencepiece
+tqdm
+scipy
+matplotlib
+pyyaml
+transformers
+datasets

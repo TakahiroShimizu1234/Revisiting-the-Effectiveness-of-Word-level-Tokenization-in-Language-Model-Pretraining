@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+*.out
+*.err
+*.o*
+*.e*
+
+# Large model/checkpoint files
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+*.tar
+*.tar.gz
+*.zip
+*.gz
+
+# Experiment outputs
+wandb/
+runs/
+outputs/
+checkpoints/
+logs/
+tmp/
+cache/
+
+# Secrets and local environment files
+.env
+*.key
+*.pem
+credentials.json
+secrets.json
+
+# OS
+.DS_Store

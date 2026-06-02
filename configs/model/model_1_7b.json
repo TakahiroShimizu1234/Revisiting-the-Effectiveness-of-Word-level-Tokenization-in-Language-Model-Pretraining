@@ -1,0 +1,7 @@
+{
+  "model_path": "path/to/smollm2-1.7b",
+  "tokenizer_path": "path/to/smollm2-1.7b",
+  "context_length": 1024,
+  "batch_size": 4,
+  "learning_rate": 2e-05
+}

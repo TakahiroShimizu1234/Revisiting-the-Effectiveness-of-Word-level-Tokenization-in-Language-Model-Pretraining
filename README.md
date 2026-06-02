@@ -64,7 +64,7 @@ Tokens: ['cats', '_', 'sit', '_', 'on', '_', '<0x73>', '<0x6F>', '<0x66>', '<0x6
 Decode: cats sit on sofa
 ```
 
-## Code Used in the Paper
+## Code Used in the Manuscript
 
 This repository includes scripts used for the analyses in the manuscript:
 

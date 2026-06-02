@@ -100,3 +100,14 @@ Example downstream evaluation:
 ```bash
 bash scripts/evaluation/run_lm_eval.sh path/to/model path/to/tokenizer results/lm_eval_results.json
 ```
+
+## Pretraining Scripts
+
+This repository includes sanitized launch scripts for the language model pretraining runs used in the manuscript:
+
+- `scripts/training/pretraining_runs/`: sanitized pretraining launch scripts
+- `scripts/training/pretraining_runs/seed_runs/`: additional multi-seed pretraining runs
+- `scripts/training/pretraining_runs/docmatch/`: document-matched control runs
+- `configs/training/scratch/`: sanitized model configuration files
+
+These scripts document the experimental workflow. Private server paths, raw corpora, checkpoints, and cluster-specific identifiers are not included.

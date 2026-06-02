@@ -35,7 +35,9 @@ This repository provides the main tokenizer implementation and analysis scripts 
 
 ## Citation
 
-Coming soon.
+This repository accompanies the paper **Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining**.
+
+Citation information will be added after the paper is finalized.
 
 ## Quick Demo
 

@@ -1,8 +1,10 @@
 # Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining
 
-This repository contains the main code used for the experiments in:
+This repository contains code for experiments related to the manuscript:
 
 **Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining**
+
+The manuscript is currently under review.
 
 ## Overview
 
@@ -35,9 +37,14 @@ This repository provides the main tokenizer implementation and analysis scripts 
 
 ## Citation
 
-This repository accompanies the paper **Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining**.
+This repository contains code for the manuscript **Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining**.
 
-Citation information will be added after the paper is finalized.
+Citation information will be added after the manuscript is finalized.
+
+## Review Status and Anonymity
+
+This repository is maintained for portfolio and reproducibility purposes.
+During anonymous review, this repository should not be linked from the submitted manuscript or author response.
 
 ## Quick Demo
 
@@ -59,7 +66,7 @@ Decode: cats sit on sofa
 
 ## Code Used in the Paper
 
-This repository includes scripts used for the analyses reported in the paper:
+This repository includes scripts used for the analyses in the manuscript:
 
 - `analysis/statistics/`: Wilcoxon signed-rank tests for multi-seed results
 - `analysis/logprob/`: token-level log-probability analysis and visualization

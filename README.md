@@ -65,3 +65,29 @@ This repository includes scripts used for the analyses reported in the paper:
 - `configs/model/`: model configuration files used in the experiments
 
 Large pretrained checkpoints, raw training corpora, and external libraries are not included.
+
+## Preprocessing and Evaluation Scripts
+
+This repository also includes lightweight scripts for reproducing key parts of the experimental workflow:
+
+- `scripts/preprocessing/build_vocab.py`: builds a word-level vocabulary with reserved special tokens and UTF-8 byte fallback tokens
+- `scripts/preprocessing/train_sentencepiece.py`: trains SentencePiece unigram or BPE tokenizer baselines
+- `scripts/evaluation/run_lm_eval.sh`: provides an example `lm-evaluation-harness` command for downstream zero-shot evaluation
+
+Example vocabulary construction:
+
+```bash
+python3 scripts/preprocessing/build_vocab.py --input examples/sample_text.txt --output examples/demo_vocab.json --vocab_size 300
+```
+
+Example SentencePiece baseline training:
+
+```bash
+python3 scripts/preprocessing/train_sentencepiece.py --input examples/sample_text.txt --model_prefix examples/demo_spm_unigram --vocab_size 300 --model_type unigram --byte_fallback
+```
+
+Example downstream evaluation:
+
+```bash
+bash scripts/evaluation/run_lm_eval.sh path/to/model path/to/tokenizer results/lm_eval_results.json
+```

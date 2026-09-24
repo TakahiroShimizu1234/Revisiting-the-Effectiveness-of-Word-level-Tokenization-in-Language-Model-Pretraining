@@ -1,9 +1,14 @@
 cff-version: 1.2.0
-title: "Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining"
-message: "Citation information will be updated after the manuscript is finalized."
+message: "If you use this repository, please cite the associated MRL 2026 paper."
 type: software
+title: "Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining"
 authors:
   - family-names: Shimizu
     given-names: Takahiro
+  - family-names: Wang
+    given-names: Tianqi
+  - family-names: Suzuki
+    given-names: Jun
 year: 2026
+repository-code: "https://github.com/cl-tohoku/Revisiting-the-Effectiveness-of-Word-level-Tokenization-in-Language-Model-Pretraining"
 license: MIT

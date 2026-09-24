@@ -1,0 +1,8 @@
+{
+  "tokenizer_class": "MPTokenizer",
+  "model_max_length": 1024,
+  "bos_token": "<s>",
+  "eos_token": "</s>",
+  "unk_token": "<unk>",
+  "pad_token": "<pad>"
+}

@@ -1,12 +1,3 @@
-# Review Status and Repository Use
+# Publication Status
 
-This repository contains code related to the manuscript:
-
-**Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining**
-
-The manuscript is currently under review.
-
-This repository is intended for portfolio and reproducibility purposes.
-During anonymous review, this repository should not be linked from the submitted manuscript or author response.
-
-Large pretrained checkpoints, raw training corpora, private server paths, and external libraries are not included.
+The paper **Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining** by Takahiro Shimizu, Tianqi Wang, and Jun Suzuki was accepted at MRL 2026, co-located with EMNLP 2026.

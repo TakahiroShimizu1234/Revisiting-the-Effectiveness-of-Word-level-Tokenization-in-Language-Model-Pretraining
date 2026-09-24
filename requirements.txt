@@ -8,3 +8,8 @@ matplotlib
 pyyaml
 transformers
 datasets
+torch
+tokenizers
+jieba
+fugashi
+unidic-lite

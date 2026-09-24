@@ -1,113 +1,200 @@
 # Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining
 
-This repository contains code for experiments related to the manuscript:
+Code and tokenizer assets for the paper:
 
 **Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining**
 
-The manuscript is currently under review.
+Takahiro Shimizu, Tianqi Wang, and Jun Suzuki
+
+**Accepted at the 6th Workshop on Multilingual Representation Learning (MRL 2026), co-located with EMNLP 2026.**
 
 ## Overview
 
-This project revisits word-level tokenization for language model pretraining.
-We compare word-level tokenization with byte fallback against subword tokenization methods such as SentencePiece unigram and BPE.
+This work revisits word-level tokenization for language model pretraining. We compare word-level tokenization with UTF-8 byte fallback against SentencePiece Unigram tokenization across multiple languages, vocabulary sizes, and model configurations.
+
+Both approaches can represent out-of-vocabulary text without relying on an unknown token. We examine downstream accuracy as well as tokenization efficiency and raw-text exposure under fixed emitted-token budgets.
+
+## Experimental Settings
+
+We study four languages:
+
+| Language | Word-level segmentation |
+| --- | --- |
+| English | Rule-based segmentation |
+| French | Language-aware segmentation |
+| Chinese | jieba |
+| Japanese | MeCab / fugashi |
+
+The primary comparisons use three vocabulary sizes: **10k, 50k, and 100k**.
+
+The English experiments cover six model configurations across the SmolLM2, Gemma 3, Qwen 3, and Llama 3.2 model families. The multilingual experiments extend the comparison to French, Chinese, and Japanese.
 
 ## Repository Structure
 
 ```text
-tokenizer/   Word-level tokenizer implementation with byte fallback
-analysis/    OOV analysis and plotting scripts
-scripts/     Utility scripts for experiment workflows
-configs/     Configuration files
-examples/    Small examples for tokenizer behavior
-results/     Processed result files used for analysis
-docs/        Additional notes and documentation
+src/
+    Pretraining implementations
+
+tokenizer/
+    General word-level tokenizer implementation
+
+tokenizer_assets/
+    Word-level and SentencePiece Unigram tokenizer assets
+    for English, French, Chinese, and Japanese
+
+scripts/
+    Preprocessing, training, evaluation, and tokenization
+    analysis scripts
+
+configs/
+    Model and training configurations
+
+analysis/
+    Additional statistical and token-level analyses
+
+examples/
+    Small tokenizer examples
+
+docs/
+    Implementation notes
 ```
 
-## Main Components
+## Setup
 
-- Word-level tokenizer with byte fallback
-- OOV-count analysis scripts
-- Plotting scripts for OOV count and downstream accuracy
-- Skeleton directories for experiment scripts, configs, examples, and processed results
+Install the Python dependencies:
 
-## Reproducing Experiments
+```bash
+pip install -r requirements.txt
+```
 
-Full language model pretraining may require large-scale GPU resources.
-This repository provides the main tokenizer implementation and analysis scripts used for the reported experiments.
+For downstream evaluation with lm-evaluation-harness, additionally install:
 
-## Citation
+```bash
+pip install lm-eval
+```
 
-This repository contains code for the manuscript **Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining**.
+Full pretraining requires substantial computational resources. Some launch scripts were originally written for an HPC environment and must be adapted to other systems.
 
-Citation information will be added after the manuscript is finalized.
+## Tokenizer Assets
 
-## Review Status and Anonymity
+The `tokenizer_assets/` directory contains 24 primary tokenizer conditions:
 
-This repository is maintained for portfolio and reproducibility purposes.
-During anonymous review, this repository should not be linked from the submitted manuscript or author response.
+- Four languages: English, French, Chinese, and Japanese
+- Three vocabulary sizes: 10k, 50k, and 100k
+- Two tokenizer types: word-level and SentencePiece Unigram
+
+Word-level tokenizer directories contain the tokenizer implementation, vocabulary, and available configuration files.
+
+The SentencePiece Unigram assets use `tokenizer.model` for English, Chinese, and Japanese, and `tokenizer.json` for French.
+
+The word-level tokenizers use language-specific segmentation and UTF-8 byte fallback for out-of-vocabulary units.
+
+See `docs/tokenizer.md` for further details.
 
 ## Quick Demo
 
-Run the tokenizer demo with:
+Run the existing small tokenizer example:
 
 ```bash
 python3 examples/tokenizer_demo.py
 ```
 
-The demo shows how the tokenizer preserves known word-level units and applies UTF-8 byte fallback to out-of-vocabulary units.
+This demonstrates preservation of in-vocabulary units and byte fallback for out-of-vocabulary units.
 
-Example output:
+## Pretraining
+
+The main pretraining implementations are:
 
 ```text
-Input : cats sit on sofa
-Tokens: ['cats', '_', 'sit', '_', 'on', '_', '<0x73>', '<0x6F>', '<0x66>', '<0x61>']
-Decode: cats sit on sofa
+src/pretrain_scratch_unified.py
+src/pretrain_scratch_unified_lowercase.py
 ```
 
-## Code Used in the Manuscript
+Sanitized example launch scripts and configurations are available under:
 
-This repository includes scripts used for the analyses in the manuscript:
+```text
+scripts/training/pretraining_runs/
+configs/training/scratch/
+```
 
-- `analysis/statistics/`: Wilcoxon signed-rank tests for multi-seed results
-- `analysis/logprob/`: token-level log-probability analysis and visualization
-- `scripts/checks/`: vocabulary sanity checks
-- `configs/model/`: model configuration files used in the experiments
+The currently included launch scripts and configurations cover the earlier SmolLM2 English runs. They do not constitute a complete set of configurations for every experiment in the camera-ready paper.
 
-Large pretrained checkpoints, raw training corpora, and external libraries are not included.
+The repository does not contain pretrained model checkpoints or raw training corpora.
 
-## Preprocessing and Evaluation Scripts
+## Token-Budget Exposure Analysis
 
-This repository also includes lightweight scripts for reproducing key parts of the experimental workflow:
+The multilingual tokenization analysis script is:
 
-- `scripts/preprocessing/build_vocab.py`: builds a word-level vocabulary with reserved special tokens and UTF-8 byte fallback tokens
-- `scripts/preprocessing/train_sentencepiece.py`: trains SentencePiece unigram or BPE tokenizer baselines
-- `scripts/evaluation/run_lm_eval.sh`: provides an example `lm-evaluation-harness` command for downstream zero-shot evaluation
+```text
+scripts/analysis/analyze_multilingual_tokenization.py
+```
 
-Example vocabulary construction:
+It compares word-level and Unigram tokenizers at fixed emitted-token checkpoints, measuring quantities including:
+
+- Documents covered
+- Characters and UTF-8 bytes covered
+- Segmentation units covered
+- Tokens per unit
+- Characters and bytes per token
+- Byte fallback rate
+- Word-level OOV rate
+
+The script uses the tokenizer assets in this repository by default. An alternative project root can be supplied with the `TOKENIZATION_PROJECT_ROOT` environment variable.
+
+For example, a small Chinese smoke test can be run with:
 
 ```bash
-python3 scripts/preprocessing/build_vocab.py --input examples/sample_text.txt --output examples/demo_vocab.json --vocab_size 300
+python3 scripts/analysis/analyze_multilingual_tokenization.py \
+  --lang zh \
+  --checkpoints 10000 \
+  --num_workers 2 \
+  --batch_size 32 \
+  --fragmentation_docs 20 \
+  --max_docs 1000 \
+  --output results/zh_smoke_test.csv
 ```
 
-Example SentencePiece baseline training:
+This is a small workflow check, not a command for reproducing the full-scale results.
+
+## Evaluation
+
+An example zero-shot evaluation command is available at:
+
+```text
+scripts/evaluation/run_lm_eval.sh
+```
+
+Example:
 
 ```bash
-python3 scripts/preprocessing/train_sentencepiece.py --input examples/sample_text.txt --model_prefix examples/demo_spm_unigram --vocab_size 300 --model_type unigram --byte_fallback
+bash scripts/evaluation/run_lm_eval.sh \
+  path/to/model \
+  path/to/tokenizer \
+  results/lm_eval_results.json
 ```
 
-Example downstream evaluation:
+The script provides an example task selection. The exact tasks, preprocessing, tokenizer loading, and scoring settings must be matched to the corresponding experiment before comparing results with the paper.
 
-```bash
-bash scripts/evaluation/run_lm_eval.sh path/to/model path/to/tokenizer results/lm_eval_results.json
+The English lowercase evaluation patch is provided at:
+
+```text
+scripts/evaluation/lowercase_eval_patch/sitecustomize.py
 ```
 
-## Pretraining Scripts
+## Release Scope
 
-This repository includes sanitized launch scripts for the language model pretraining runs used in the manuscript:
+This repository provides tokenizer implementations and assets, the main pretraining implementations, selected launch scripts and configurations, and analysis utilities.
 
-- `scripts/training/pretraining_runs/`: sanitized pretraining launch scripts
-- `scripts/training/pretraining_runs/seed_runs/`: additional multi-seed pretraining runs
-- `scripts/training/pretraining_runs/docmatch/`: document-matched control runs
-- `configs/training/scratch/`: sanitized model configuration files
+It is not yet a one-command, end-to-end reproduction package for all experiments in the paper. Large model checkpoints, raw corpora, and raw evaluation outputs are not included.
 
-These scripts document the experimental workflow. Private server paths, raw corpora, checkpoints, and cluster-specific identifiers are not included.
+## Citation
+
+If you use this repository, please cite:
+
+**Shimizu, Takahiro; Wang, Tianqi; and Suzuki, Jun. (2026). Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining. MRL 2026.**
+
+See `CITATION.cff` for repository citation metadata.
+
+## License
+
+See [LICENSE](LICENSE).

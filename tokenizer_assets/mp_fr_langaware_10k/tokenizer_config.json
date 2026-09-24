@@ -1,0 +1,12 @@
+{
+  "tokenizer_class": "MPTokenizer",
+  "model_max_length": 8192,
+  "bos_token": "<s>",
+  "eos_token": "</s>",
+  "unk_token": "<unk>",
+  "pad_token": "<pad>",
+  "language": "fr",
+  "tokenizer_type": "language-aware-word-level",
+  "normalization": "NFC+lowercase+apostrophe-normalization",
+  "target_vocab_size": 10000
+}

@@ -17,4 +17,4 @@ Private server paths, account names, raw corpora, checkpoints, personal email ad
 
 Corresponding sanitized model configuration files are placed under `configs/training/scratch/`.
 
-Note: The launch scripts document the pretraining commands and configurations used in the experiments. The full trainer implementation and cluster-specific infrastructure are not included in this public repository.
+The main trainer implementations are included under `src/`. Cluster-specific infrastructure, raw corpora, and model checkpoints are not included. The sanitized launch scripts may require adaptation to run in another environment.

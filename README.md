@@ -39,8 +39,8 @@ tokenizer/
     General word-level tokenizer implementation
 
 tokenizer_assets/
-    Word-level and SentencePiece Unigram tokenizer assets
-    for English, French, Chinese, and Japanese
+    Word-level, SentencePiece Unigram, and SentencePiece BPE
+    tokenizer assets for English, French, Chinese, and Japanese
 
 scripts/
     Preprocessing, training, evaluation, and tokenization
@@ -48,12 +48,6 @@ scripts/
 
 configs/
     Model and training configurations
-
-analysis/
-    Additional statistical and token-level analyses
-
-examples/
-    Small tokenizer examples
 
 docs/
     Implementation notes
@@ -99,22 +93,12 @@ The paper-style English word-level tokenizer assets are:
 
 These assets were copied from the final Llama 3.2 1B English checkpoints for the three nominal vocabulary settings. Their tokenizer files, vocabulary mappings, and sample token-ID sequences were verified against those checkpoints. The saved vocabulary sizes are 10,001, 50,001, and 100,000, respectively.
 
-These assets use rule-based segmentation: alphabetic runs, individual digits, individual punctuation/symbol characters, and one `_` token per whitespace character. Vocabulary matching is lowercase; out-of-vocabulary units fall back to UTF-8 bytes.
+These assets use rule-based segmentation: alphabetic runs, individual digits, individual punctuation/symbol characters, and one `_` token per whitespace character. Non-whitespace units are lowercased for vocabulary lookup; out-of-vocabulary units fall back to UTF-8 bytes of their forms before lookup-time lowercasing.
 
 
-Correspondence between these exact vocabulary mappings and every other English model family has not yet been verified.
+The three published English word-level tokenizer assets were verified against the corresponding final Llama 3.2 1B checkpoints. Vocabulary mappings for additional English model configurations were examined separately.
 
 See `docs/tokenizer.md` for further details.
-
-## Quick Demo
-
-Run the existing small tokenizer example:
-
-```bash
-python3 examples/tokenizer_demo.py
-```
-
-This demonstrates preservation of in-vocabulary units and byte fallback for out-of-vocabulary units.
 
 ## Pretraining
 

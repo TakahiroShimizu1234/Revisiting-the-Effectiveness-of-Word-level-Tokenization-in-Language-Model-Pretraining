@@ -11,9 +11,6 @@ Private server paths, account names, raw corpora, checkpoints, personal email ad
 - `scratch_pretrain_135m_*`: 135M scratch pretraining runs
 - `scratch_pretrain_360m_*`: 360M scratch pretraining runs
 - `scratch_pretrain_1_7b_*`: 1.7B scratch pretraining runs
-- `seed_runs/`: additional 135M multi-seed runs
-- `docmatch/`: document-matched controls for word-level models
-- `docmatch_reverse/`: document-matched controls for subword models
 
 Corresponding sanitized model configuration files are placed under `configs/training/scratch/`.
 

@@ -18,6 +18,6 @@ For the verified Llama 3.2 1B English checkpoints, use `mp_en_paper_10k`, `mp_en
 English segmentation uses alphabetic runs, single digits, single punctuation/symbol characters, and one `_` per whitespace character. Vocabulary lookup uses lowercase; UTF-8 byte fallback uses the original unmatched unit.
 
 
-The multilingual token-budget analysis script defaults to the `mp_en_paper_*` assets for English. Its English vocabulary-specific results should not be assumed to represent every other model family until those models' tokenizer mappings have been checked.
+The multilingual token-budget analysis script defaults to the `mp_en_paper_*` assets for English. When reproducing a specific pretraining run, use the tokenizer saved with that run's checkpoint.
 
 For French, Chinese, and Japanese, see their language-specific `mp_tokenizer.py` implementations.

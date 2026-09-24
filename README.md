@@ -213,3 +213,17 @@ See `CITATION.cff` for repository citation metadata.
 ## License
 
 See [LICENSE](LICENSE).
+
+## SentencePiece BPE tokenizers (Appendix C–D)
+
+The BPE comparisons in Appendices C and D use the Llama3.2 1B
+configuration for English, French, Chinese, and Japanese, each at
+10k, 50k, and 100k target vocabulary sizes. The corresponding
+tokenizer assets are provided in the following directories:
+
+| Language | Tokenizer assets |
+|---|---|
+| English | `tokenizers/spm_bpe_fwe{10k,50k,100k}_en_spm_hf/` |
+| French | `tokenizer_assets/spm_fr_langaware_bpe_{10k,50k,100k}_5m_fixednorm_portable/` |
+| Chinese | `tokenizer_assets/spm_zh_bpe_{10k,50k,100k}_5m/` |
+| Japanese | `tokenizer_assets/spm_ja_bpe_{10k,50k,100k}_5m/` |

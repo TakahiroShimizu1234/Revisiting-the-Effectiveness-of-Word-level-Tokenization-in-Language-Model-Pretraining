@@ -77,7 +77,7 @@ def load_python_module(path, name):
 
 def word_dir(lang, vocab):
     if lang == "en":
-        return ROOT / f"tokenizer_assets/mp_en_whitespace_{vocab}"
+        return ROOT / f"tokenizer_assets/mp_en_paper_{vocab}"
     if lang == "fr":
         return ROOT / f"tokenizer_assets/mp_fr_langaware_{vocab}"
     if lang == "zh":
@@ -154,10 +154,10 @@ def init_worker(lang):
     # English: use the actual tokenizer implementation
     if lang == "en":
         mod = load_python_module(
-            word_dir("en", "10k") / "mp_tokenizer.py",
+            word_dir("en", "10k") / "tokenization_mp_tokenizer.py",
             "mp_en_analysis",
         )
-        _EN_TOKENIZER = mod.MPTokenizer()
+        _EN_TOKENIZER = mod
 
     # French: use the actual normalization/segmentation implementation
     elif lang == "fr":
@@ -215,7 +215,13 @@ def segment_units(text):
 
     # Exact English MP tokenizer segmentation
     if _LANG == "en":
-        return list(_EN_TOKENIZER.basic_tokenize(text))
+        out = []
+        for unit in _EN_TOKENIZER.split_units(text):
+            if unit.isspace():
+                out.extend(["_"] * len(unit))
+            else:
+                out.append(unit)
+        return out
 
     # Exact French language-aware segmentation
     if _LANG == "fr":
@@ -309,7 +315,11 @@ def analyze_document(item):
         oov_lexical_units = 0
 
         for u in units:
-            if u in vocab:
+            # English matches vocabulary in lowercase, but byte
+            # fallback uses the original, non-lowercased unit.
+            key = u.lower() if _LANG == "en" else u
+
+            if key in vocab:
                 tokens += 1
             else:
                 nbytes = len(u.encode("utf-8"))

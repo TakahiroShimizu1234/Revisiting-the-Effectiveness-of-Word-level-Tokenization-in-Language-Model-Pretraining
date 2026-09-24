@@ -1,0 +1,10 @@
+{
+  "tokenizer_class": "MPTokenizer",
+  "auto_map": {
+    "AutoTokenizer": [
+      "tokenization_mp_tokenizer.MPTokenizer",
+      null
+    ]
+  },
+  "model_max_length": 8192
+}

@@ -89,6 +89,22 @@ The SentencePiece Unigram assets use `tokenizer.model` for English, Chinese, and
 
 The word-level tokenizers use language-specific segmentation and UTF-8 byte fallback for out-of-vocabulary units.
 
+### English tokenizer assets
+
+The paper-style English word-level tokenizer assets are:
+
+- `tokenizer_assets/mp_en_paper_10k/`
+- `tokenizer_assets/mp_en_paper_50k/`
+- `tokenizer_assets/mp_en_paper_100k/`
+
+These assets were copied from the final Llama 3.2 1B English checkpoints for the three nominal vocabulary settings. Their tokenizer files, vocabulary mappings, and sample token-ID sequences were verified against those checkpoints. The saved vocabulary sizes are 10,001, 50,001, and 100,000, respectively.
+
+These assets use rule-based segmentation: alphabetic runs, individual digits, individual punctuation/symbol characters, and one `_` token per whitespace character. Vocabulary matching is lowercase; out-of-vocabulary units fall back to UTF-8 bytes.
+
+The separately retained `mp_en_whitespace_*` directories belong to a different whitespace-tokenization experiment. They are **not** the tokenizer assets for the verified Llama 3.2 1B English paper results.
+
+Correspondence between these exact vocabulary mappings and every other English model family has not yet been verified.
+
 See `docs/tokenizer.md` for further details.
 
 ## Quick Demo

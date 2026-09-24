@@ -101,7 +101,6 @@ These assets were copied from the final Llama 3.2 1B English checkpoints for the
 
 These assets use rule-based segmentation: alphabetic runs, individual digits, individual punctuation/symbol characters, and one `_` token per whitespace character. Vocabulary matching is lowercase; out-of-vocabulary units fall back to UTF-8 bytes.
 
-The separately retained `mp_en_whitespace_*` directories belong to a different whitespace-tokenization experiment. They are **not** the tokenizer assets for the verified Llama 3.2 1B English paper results.
 
 Correspondence between these exact vocabulary mappings and every other English model family has not yet been verified.
 

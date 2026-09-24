@@ -36,9 +36,11 @@ class MPTokenizer(PreTrainedTokenizer):
 
         self.vocab = vocab
         self.inv_vocab = {i: t for t, i in vocab.items()}
+        import unidic_lite
+
         dicdir = os.environ.get(
             "MECAB_DICDIR",
-            "/work/c30897/shimizu/ACL2026/.venv/lib/python3.9/site-packages/unidic_lite/dicdir",
+            unidic_lite.DICDIR,
         )
         self.tagger = Tagger(f"-d {dicdir}")
 

@@ -104,7 +104,7 @@ The three published English word-level tokenizer assets were verified against th
 
 See `docs/tokenizer.md` for further details.
 
-### SentencePiece BPE Tokenizers (Appendices C–D)
+### SentencePiece BPE Tokenizers (Appendices)
 The BPE comparisons in Appendices C and D use the Llama3.2 1B
 configuration for English, French, Chinese, and Japanese, each at
 10k, 50k, and 100k target vocabulary sizes. The corresponding

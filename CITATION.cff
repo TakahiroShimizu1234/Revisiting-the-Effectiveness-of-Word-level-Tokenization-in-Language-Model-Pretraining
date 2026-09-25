@@ -10,5 +10,5 @@ authors:
   - family-names: Suzuki
     given-names: Jun
 year: 2026
-repository-code: "https://github.com/TakahiroShimizu1234/Revisiting-the-Effectiveness-of-Word-level-Tokenization-in-Language-Model-Pretraining"
+repository-code: "https://github.com/takahiro-shimizu-nlp/word-level-tokenization"
 license: MIT

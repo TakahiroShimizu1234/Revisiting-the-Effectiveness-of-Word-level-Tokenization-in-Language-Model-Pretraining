@@ -33,7 +33,7 @@ def utf8_bytes_tokens(s: str) -> List[str]:
 
 class MPTokenizer(PreTrainedTokenizer):
     """
-    Meaning-Preserving tokenizer (no subword):
+    Word-level tokenizer with UTF-8 byte fallback:
       - dictionary uses raw tokens (e.g., "a", "hello", "!", "0")
       - whitespace is represented by "_" (special-cased)
       - matching is done in lowercase (for non-whitespace)

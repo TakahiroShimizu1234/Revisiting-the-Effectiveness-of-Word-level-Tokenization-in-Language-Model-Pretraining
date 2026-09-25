@@ -1,12 +1,16 @@
 # Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining
 
-Code and tokenizer assets for the paper:
+**Takahiro Shimizu · Tianqi Wang · Jun Suzuki**
 
-**Revisiting the Effectiveness of Word-level Tokenization in Language Model Pretraining**
+> **MRL 2026 @ EMNLP 2026** — Accepted at the 6th Workshop on Multilingual Representation Learning.
 
-Takahiro Shimizu, Tianqi Wang, and Jun Suzuki
+[Tokenizer Assets](#tokenizer-assets) · [Pretraining](#pretraining) · [Evaluation](#evaluation) · [Citation](#citation)
 
-**Accepted at the 6th Workshop on Multilingual Representation Learning (MRL 2026), co-located with EMNLP 2026.**
+Code and tokenizer assets for our study revisiting word-level tokenization in language model pretraining.
+
+We compare **word-level tokenization with UTF-8 byte fallback** against **SentencePiece Unigram** across multiple languages, vocabulary sizes, and model configurations. SentencePiece BPE tokenizers used in the appendix experiments are also provided.
+
+---
 
 ## Overview
 
@@ -99,6 +103,19 @@ These assets use rule-based segmentation: alphabetic runs, individual digits, in
 The three published English word-level tokenizer assets were verified against the corresponding final Llama 3.2 1B checkpoints. Vocabulary mappings for additional English model configurations were examined separately.
 
 See `docs/tokenizer.md` for further details.
+
+### SentencePiece BPE Tokenizers (Appendices C–D)
+The BPE comparisons in Appendices C and D use the Llama3.2 1B
+configuration for English, French, Chinese, and Japanese, each at
+10k, 50k, and 100k target vocabulary sizes. The corresponding
+tokenizer assets are provided in the following directories:
+
+| Language | Tokenizer assets |
+|---|---|
+| English | `tokenizer_assets/spm_en_bpe_{10k,50k,100k}_5m/` |
+| French | `tokenizer_assets/spm_fr_langaware_bpe_{10k,50k,100k}_5m_fixednorm_portable/` |
+| Chinese | `tokenizer_assets/spm_zh_bpe_{10k,50k,100k}_5m/` |
+| Japanese | `tokenizer_assets/spm_ja_bpe_{10k,50k,100k}_5m/` |
 
 ## Pretraining
 
@@ -197,17 +214,3 @@ See `CITATION.cff` for repository citation metadata.
 ## License
 
 See [LICENSE](LICENSE).
-
-## SentencePiece BPE tokenizers (Appendix C–D)
-
-The BPE comparisons in Appendices C and D use the Llama3.2 1B
-configuration for English, French, Chinese, and Japanese, each at
-10k, 50k, and 100k target vocabulary sizes. The corresponding
-tokenizer assets are provided in the following directories:
-
-| Language | Tokenizer assets |
-|---|---|
-| English | `tokenizers/spm_bpe_fwe{10k,50k,100k}_en_spm_hf/` |
-| French | `tokenizer_assets/spm_fr_langaware_bpe_{10k,50k,100k}_5m_fixednorm_portable/` |
-| Chinese | `tokenizer_assets/spm_zh_bpe_{10k,50k,100k}_5m/` |
-| Japanese | `tokenizer_assets/spm_ja_bpe_{10k,50k,100k}_5m/` |
